@@ -38,11 +38,19 @@ def awscodecommit_auth_config():
                 break
             else:
                 print("[-] File does not exist. Please provide a valid path")
-        config_information="""Host git-codecommit.*.amazonaws.com
+
+        check_if_config_file_exists = os.path.exists(home_directory + "/.ssh/config")
+        if check_if_config_file_exists == False:
+            file_handler = open(home_directory + "/.ssh/config", "w")
+            config_information="""Host git-codecommit.*.amazonaws.com
 User {key_id}
-IdentityFile {path_to_file}
-""".format(key_id=ssh_key_id, path_to_file=path_to_identity_file)
-        file_handler = open(home_directory + "/.ssh/config", "w")
+IdentityFile {path_to_file}""".format(key_id=ssh_key_id, path_to_file=path_to_identity_file)
+        else:
+            file_handler = open(home_directory + "/.ssh/config", "a")
+            config_information="""\n
+Host git-codecommit.*.amazonaws.com
+User {key_id}
+IdentityFile {path_to_file}""".format(key_id=ssh_key_id, path_to_file=path_to_identity_file)
         file_handler.write(config_information)
         file_handler.close()
         print('\x1b[92m'+"[+] Configuration complete"+'\x1b[37m')
@@ -69,6 +77,33 @@ IdentityFile {path_to_file}
             print('\x1b[92m'+"[+] Configuration complete"+'\x1b[37m')
         else:
             print('\x1b[31m'+"[-] Configuration did not complete successfully"+'\x1b[37m')
+
+def azuredevops_auth_config():
+    username = input("User (Name of your Azure DevOps organization): ")
+    home_directory = os.getenv("HOME")
+    while True:
+        path_to_identity_file = input("Enter file path to Identity File (SSH public key): ")
+        check_path = os.path.isfile(path_to_identity_file)
+        if check_path:
+            break
+        else:
+            print("[-] File does not exist. Please provide a valid path")
+
+    check_if_config_file_exists = os.path.exists(home_directory + "/.ssh/config")
+    if check_if_config_file_exists == False:
+        file_handler = open(home_directory + "/.ssh/config", "w")
+        config_information="""Host ssh.dev.azure.com
+User {user}
+IdentityFile {path_to_file}""".format(user=username, path_to_file=path_to_identity_file)
+    else:
+        file_handler = open(home_directory + "/.ssh/config", "a")
+        config_information="""\n
+Host ssh.dev.azure.com
+User {user}
+IdentityFile {path_to_file}""".format(user=username, path_to_file=path_to_identity_file)
+    file_handler.write(config_information)
+    file_handler.close()
+    print('\x1b[92m'+"[+] Configuration complete"+'\x1b[37m')
 
 def github_bitbucket_auth_config():
     while True:
@@ -98,10 +133,11 @@ def github_bitbucket_auth_config():
 
 
 def main():
-    print("This Python script configures the requirements needed for authenticating with the following online repositories: AWSCodeCommit, GitHub, BitBucket")
+    print("This Python script configures the requirements needed for authenticating with the following online repositories: AWSCodeCommit, Azure-DevOps Repo, GitHub, BitBucket")
     repositories = """
-    (1) AWSCodeCommit
-    (2) BitBucket / GitHub (ssh-config)
+    (1) AWSCodeCommit (ssh-config & HTTPS-GRC)
+    (2) Azure-DevOps Repo (ssh-config)
+    (3) BitBucket / GitHub (ssh-config)
     """
 
     while True:
@@ -112,6 +148,8 @@ def main():
             if repo_to_config == 1:
                 awscodecommit_auth_config()
             elif repo_to_config == 2:
+                azuredevops_auth_config()
+            elif repo_to_config == 3:
                 github_bitbucket_auth_config()
             else:
                 print("[-] Invalid option")
