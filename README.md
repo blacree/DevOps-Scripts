@@ -1,4 +1,4 @@
-# DevOps-Scripts (Linux)
+# DevOps-Scripts
 Scripts for performing/automating DevOps actions and processes (python & bash)
 
 - ### repo_auth_config.py (Linux)
