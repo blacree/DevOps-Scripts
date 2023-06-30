@@ -32,7 +32,7 @@ def awscodecommit_auth_config():
         ssh_key_id = input("SSH Key ID: ")
         home_directory = os.getenv("HOME")
         while True:
-            path_to_identity_file = input("Enter file path to Identity File (SSH public key): ")
+            path_to_identity_file = input("Enter file path to Identity File (SSH private key): ")
             check_path = os.path.isfile(path_to_identity_file)
             if check_path:
                 break
@@ -82,7 +82,7 @@ def azuredevops_auth_config():
     username = input("User (Name of your Azure DevOps organization): ")
     home_directory = os.getenv("HOME")
     while True:
-        path_to_identity_file = input("Enter file path to Identity File (SSH public key): ")
+        path_to_identity_file = input("Enter file path to Identity File (SSH private key): ")
         check_path = os.path.isfile(path_to_identity_file)
         if check_path:
             break
