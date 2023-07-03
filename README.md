@@ -13,7 +13,7 @@ Scripts for performing/automating DevOps actions and processes (python & bash)
         - accesskey : Set your accesskey as an environment variable in the "configuration" tab of your lambda function. Change this value
         to restrict access.
         - versiondetails : This query parameter takes the current version (semantic verion) which is separated by a Boolean incrementer determiner 
-        (Ex: 4.1.0|false.false.true) and returns a new semantic version. The incrementation is performed from right to left (i.e from patch to major)
+        (Ex: 4.1.0|false.false.true) and returns a new semantic version. The incrementation is performed from left to right (i.e from major to patch)
         
     URL schema:
     https://<LAMBDA_FUNCTION_URL>?accesskey={accesskey}&versiondetails={versiondetails}
