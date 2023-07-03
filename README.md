@@ -10,15 +10,12 @@ Scripts for performing/automating DevOps actions and processes (python & bash)
 - ### lambda_version_incrementer.py (Aws-Lambda)
     ```
     This Python Lambda function increments the version passed to it and returns a new version. It takes 2 query parameters which are:
-
         - accesskey : Set your accesskey as an environment variable in the "configuration" tab of your lambda function. Change this value
         to restrict access.
-
         - versiondetails : This query parameter takes the current version (semantic verion) which is separated by a Boolean incrementer determiner 
         (Ex: 4.1.0|false.false.true) and returns a new semantic version. The incrementation is performed from right to left (i.e from patch to major)
-
+        
     URL schema:
     https://<LAMBDA_FUNCTION_URL>?accesskey={accesskey}&versiondetails={versiondetails}
-
     Note: Don't forget to encode your URL.
     ```
