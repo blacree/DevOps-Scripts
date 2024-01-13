@@ -19,3 +19,6 @@ Scripts for performing/automating DevOps actions and processes (python & bash)
     https://<LAMBDA_FUNCTION_URL>?accesskey={accesskey}&versiondetails={versiondetails}
     Note: Don't forget to encode your URL.
     ```
+
+- ### repo_auth_config.py (Python & Terraform)
+    * *Coming...*
