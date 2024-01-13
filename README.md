@@ -20,5 +20,5 @@ Scripts for performing/automating DevOps actions and processes (python & bash)
     Note: Don't forget to encode your URL.
     ```
 
-- ### repo_auth_config.py (Python & Terraform)
+- ### awsmultiaccount_deployment.py (Python & Terraform)
     * *Coming...*
